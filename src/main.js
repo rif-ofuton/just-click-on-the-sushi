@@ -71,7 +71,7 @@ function update() {
 		if (frameCount == nextSpawn) {
 			// エンティティをスポーンさせる
 			rareSpawnRate = 0.1;
-			type = Math.random() < 0.1 ? 2 : 1;
+			type = Math.random() < rareSpawnRate ? 2 : 1;
 			color = type == 1 ? "#fd7e00" : "#ffd900";
 			entity = new Entity(frameCount,type,24 + Math.round(16*Math.random()),color);
 			entities.push(entity);
