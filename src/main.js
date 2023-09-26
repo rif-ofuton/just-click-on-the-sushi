@@ -15,7 +15,6 @@ onload = function() {
 	canvas = document.getElementById("gamecanvas");
 	g = canvas.getContext("2d");
 	document.addEventListener('mousedown', handleMouseDown);
-
 	init();
 	setInterval("gameloop()", 20);
 };
@@ -44,9 +43,11 @@ function handleMouseDown(event) {
 		scene = Scenes.GameMain;
 	} else if (scene == Scenes.GameMain) {
 		rect = event.target.getBoundingClientRect();
-		clickX = event.clientX - rect.left;
-		clickY = event.clientY - rect.top;
+		scale = 640 / rect.width;
+		clickX = (event.clientX - rect.left) * scale;
+		clickY = (event.clientY - rect.top) * scale;
 		clickCoords.push([clickX,clickY]);
+		console.log([clickX,clickY]);
 	} else if (scene == Scenes.GameClear) {
 		init();
 	}
@@ -170,8 +171,8 @@ o ---- o ---- o ---- o ---- o ---- o ---- o ---- o ---- */
 class Sprite {
 	constructor(r,color,spawnTime) {
 		this.r = r;
-		this.posx = Math.random() * (640-r*2);
-		this.posy = Math.random() * (480-r*2);
+		this.posx = r + Math.random() * (640-2*r);
+		this.posy = r + Math.random() * (480-2*r);
 		this.color = color;
 		this.spawnTime = spawnTime;
 		this.is_lapse = false;
